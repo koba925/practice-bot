@@ -21,7 +21,7 @@ Bolt for JavaScript を用いて Socket Mode の Slack App を作成したとこ
 $ npm install https-proxy-agent
 ```
 
-```
+```js
 // 環境変数を読んでエージェントを作成
 const HttpsProxyAgent = require('https-proxy-agent');
 const proxy = process.env.https_proxy;
