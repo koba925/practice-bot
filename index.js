@@ -1,16 +1,23 @@
-const { App } = require('@slack/bolt');
+const { App, LogLevel } = require('@slack/bolt');
 const HttpsProxyAgent = require('https-proxy-agent');
 
-const proxy = process.env.http_proxy;
-const agent = new HttpsProxyAgent(proxy);
-
-const app = new App({
-  logLevel: 'debug',
+const options = {
+  logLevel: LogLevel.DEBUG,
   socketMode: true,
   token: process.env.SLACK_BOT_TOKEN,
-  appToken: process.env.SLACK_APP_TOKEN,
-  agent
-});
+  appToken: process.env.SLACK_APP_TOKEN
+};
+
+const proxy = process.env.http_proxy;
+if (typeof proxy === 'undefined') {
+  console.log('Proxy is not set');
+} else {
+  console.log('Proxy is ' + proxy);
+  const agent = new HttpsProxyAgent(proxy);
+  options.agent = agent;
+}
+
+const app = new App(options);
 
 app.shortcut('global-shortcut', async ({ ack, body, client }) => {
   await ack();
