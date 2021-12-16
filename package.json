@@ -19,6 +19,7 @@
   "homepage": "https://github.com/koba925/practice-bot#readme",
   "dependencies": {
     "@slack/bolt": "^3.8.1",
+    "@slack/logger": "^3.0.0",
     "https-proxy-agent": "^5.0.0"
   },
   "devDependencies": {

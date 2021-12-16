@@ -1,5 +1,10 @@
-const { App, LogLevel } = require('@slack/bolt');
+const { App } = require('@slack/bolt');
+const { ConsoleLogger, logLevel, LogLevel } = require('@slack/logger');
 const HttpsProxyAgent = require('https-proxy-agent');
+
+const logger = new ConsoleLogger();
+logger.setName('practicebot:');
+logger.setLevel(LogLevel.INFO);
 
 const options = {
   logLevel: LogLevel.DEBUG,
@@ -10,9 +15,9 @@ const options = {
 
 const proxy = process.env.http_proxy;
 if (typeof proxy === 'undefined') {
-  console.log('Proxy is not set');
+  logger.info('Proxy is not set');
 } else {
-  console.log('Proxy is ' + proxy);
+  logger.info('Proxy is ' + proxy);
   const agent = new HttpsProxyAgent(proxy);
   options.agent = agent;
 }
@@ -72,5 +77,5 @@ app.message('こんにちは', async ({ message, say }) => {
 
 (async () => {
   await app.start();
-  console.log('PracticeBot started');
+  logger.info('PracticeBot started');
 })();
