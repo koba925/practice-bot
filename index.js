@@ -1,5 +1,5 @@
 const { App } = require('@slack/bolt');
-const { ConsoleLogger, logLevel, LogLevel } = require('@slack/logger');
+const { ConsoleLogger, LogLevel } = require('@slack/logger');
 const HttpsProxyAgent = require('https-proxy-agent');
 
 const logger = new ConsoleLogger();
